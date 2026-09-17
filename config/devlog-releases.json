@@ -1,2 +1,10 @@
-[]
-
+[
+  {
+    "version": "2026.8.1",
+    "date": "2026-08-31",
+    "title": "QuorumPatch foundation",
+    "summary": "Initial repair-verification prototype and human review boundary.",
+    "notes": ["Public source and anonymized case studies are introduced in the next release."],
+    "author": { "name": "Ari Bradshaw", "githubLogin": "aribradshaw" }
+  }
+]
