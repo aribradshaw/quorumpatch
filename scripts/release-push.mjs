@@ -1,0 +1,16 @@
+import { execFileSync } from 'node:child_process';
+const run = (file, args) => execFileSync(file, args, { stdio: 'inherit' });
+const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
+if (git('branch', '--show-current') !== 'main') throw new Error('Release from main only');
+if (git('status', '--porcelain')) throw new Error('Commit reviewed source changes first');
+process.env.DEVLOG_PRODUCTION = 'true';
+process.env.DEVLOG_BRANCH = 'main';
+process.env.DEVLOG_COMMIT_SHA = git('rev-parse', 'HEAD');
+process.env.DEVLOG_COMMIT_SUBJECT = git('log', '-1', '--format=%s');
+process.env.DEVLOG_AUTHOR_NAME = git('log', '-1', '--format=%an');
+run(process.execPath, ['scripts/privacy-check.mjs', '--history']);
+run(process.execPath, ['node_modules/@aribradshaw/devlog/dist/cli.js', 'prepare', '--production']);
+run(process.execPath, ['node_modules/@aribradshaw/devlog/dist/cli.js', 'check', '--production']);
+run('git', ['add', 'package.json', 'package-lock.json', 'config/devlog-releases.json']);
+if (git('diff', '--cached', '--name-only')) run('git', ['commit', '-m', 'chore(release): update calendar DevLog']);
+run('git', ['push', '-u', 'origin', 'main']);

@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+node scripts/privacy-check.mjs --history
+node node_modules/@aribradshaw/devlog/dist/cli.js check --production
+

@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "failClosed": true,
+  "productionBranches": [
+    "main"
+  ],
+  "ignoreCommitPrefixes": [
+    "chore(release):"
+  ],
+  "registryPath": "config/devlog-releases.json",
+  "manifestPaths": [
+    "package.json",
+    "package-lock.json"
+  ],
+  "timeZone": "America/Phoenix",
+  "baselineVersion": "2026.8.1",
+  "author": {
+    "name": "Ari Bradshaw",
+    "githubLogin": "aribradshaw"
+  }
+}

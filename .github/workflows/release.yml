@@ -1,0 +1,31 @@
+name: Calendar release
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+concurrency:
+  group: calendar-release
+  cancel-in-progress: false
+jobs:
+  release:
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run verify
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm run release:push
+        env:
+          DEVLOG_PRODUCTION: 'true'
+          DEVLOG_BRANCH: main
