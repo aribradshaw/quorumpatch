@@ -1,14 +1,12 @@
-import '../marketing.css';
+import '../experience.css';
 
 export default function LoadingEvidence() {
   return (
-    <main className="marketing" aria-busy="true">
-      <div className="mk-loading mk-wrap" role="status">
-        <p>Loading QuorumPatch evidence…</p>
+    <main className="qp" aria-busy="true">
+      <div className="qp-wrap" role="status" aria-label="Loading">
         <div aria-hidden="true">
-          <span className="mk-skeleton mk-loading-title" />
-          <span className="mk-skeleton mk-loading-line" />
-          <span className="mk-skeleton mk-loading-panel" />
+          <div className="qp-skeleton qp-skeleton-title" />
+          <div className="qp-skeleton qp-skeleton-panel" />
         </div>
       </div>
     </main>

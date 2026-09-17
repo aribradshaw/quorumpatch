@@ -14,7 +14,9 @@ npm run demo:local
 npm run dev
 ```
 
-The homepage introduces the method. Open /demo for six anonymized real-code case studies. These are author-reported summaries of private runs, not independently verifiable public receipts. Client code, identities, ticket references, original amounts, precise dates and raw receipt fingerprints are deliberately absent.
+Open /walkthrough for an interactive, browser-only replay of the synthetic quantity example. Apply the prepared patch, inspect additional inputs, and remove the repair. This interface does not launch a live Solari run.
+
+Open /demo for six anonymized real-code case studies. These are author-reported summaries of private runs, not independently verifiable public receipts. Client code, identities, ticket references, original amounts, precise dates and raw receipt fingerprints are deliberately absent.
 
 The independently runnable example is original synthetic code, not a reconstruction of any client's implementation. Local mode is process isolation, not a security sandbox. Optional cloud mode launches four separate Solari sandboxes, verifies uploaded bytes and releases them:
 
@@ -41,4 +43,3 @@ This repository is the public source of truth. Never merge private workspace his
 ## License
 
 MIT for the source distributed here. No rights to private client code are granted or implied.
-
