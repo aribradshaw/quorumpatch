@@ -1,5 +1,23 @@
 [
   {
+    "version": "2026.9.3",
+    "date": "2026-09-17",
+    "releasedAt": "2026-09-17T08:50:24.928Z",
+    "commit": "8e5a84ce4eec9c9b5caa1fa3a2c50652bfc574a4",
+    "sourceSubject": "feat: verify three pinned open-source bugs with reproducible Solari evidence",
+    "title": "verify three pinned open-source bugs with reproducible Solari evidence",
+    "summary": "Production now includes: verify three pinned open-source bugs with reproducible Solari evidence.",
+    "notes": [
+      "verify three pinned open-source bugs with reproducible Solari evidence"
+    ],
+    "author": {
+      "name": "Ari Bradshaw",
+      "githubLogin": null,
+      "avatarUrl": null,
+      "profileUrl": null
+    }
+  },
+  {
     "version": "2026.9.2",
     "date": "2026-09-17",
     "releasedAt": "2026-09-17T08:21:30.569Z",
