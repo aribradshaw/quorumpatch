@@ -1,10 +1,36 @@
 [
   {
+    "version": "2026.9.1",
+    "date": "2026-09-17",
+    "releasedAt": "2026-09-17T08:08:37.654Z",
+    "commit": "fcb9cd55546a5cde1af595f5b611d9d837fc3899",
+    "sourceSubject": "Initialize public calendar release baseline",
+    "title": "Initialize public calendar release baseline",
+    "summary": "Production now includes: Initialize public calendar release baseline.",
+    "notes": [
+      "Initialize public calendar release baseline"
+    ],
+    "author": {
+      "name": "Ari Bradshaw",
+      "githubLogin": null,
+      "avatarUrl": null,
+      "profileUrl": null
+    }
+  },
+  {
     "version": "2026.8.1",
     "date": "2026-08-31",
     "title": "QuorumPatch foundation",
     "summary": "Initial repair-verification prototype and human review boundary.",
-    "notes": ["Public source and anonymized case studies are introduced in the next release."],
-    "author": { "name": "Ari Bradshaw", "githubLogin": "aribradshaw" }
+    "notes": [
+      "Public source and anonymized case studies are introduced in the next release."
+    ],
+    "author": {
+      "name": "Ari Bradshaw",
+      "githubLogin": "aribradshaw",
+      "avatarUrl": null,
+      "profileUrl": null
+    },
+    "commit": null
   }
 ]
