@@ -1,6 +1,6 @@
 {
   "name": "quorumpatch",
-  "version": "2026.9.1",
+  "version": "2026.9.2",
   "private": true,
   "description": "Counterfactual repair verification with isolated Solari witnesses and human review.",
   "license": "MIT",

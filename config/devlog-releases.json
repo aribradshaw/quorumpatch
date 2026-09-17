@@ -1,5 +1,23 @@
 [
   {
+    "version": "2026.9.2",
+    "date": "2026-09-17",
+    "releasedAt": "2026-09-17T08:21:30.569Z",
+    "commit": "8daada4e1e7ace66fb2e85bf20ad199f03457886",
+    "sourceSubject": "feat: add guided walkthrough and simplify evidence experience",
+    "title": "add guided walkthrough and simplify evidence experience",
+    "summary": "Production now includes: add guided walkthrough and simplify evidence experience.",
+    "notes": [
+      "add guided walkthrough and simplify evidence experience"
+    ],
+    "author": {
+      "name": "Ari Bradshaw",
+      "githubLogin": null,
+      "avatarUrl": null,
+      "profileUrl": null
+    }
+  },
+  {
     "version": "2026.9.1",
     "date": "2026-09-17",
     "releasedAt": "2026-09-17T08:08:37.654Z",
