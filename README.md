@@ -14,9 +14,50 @@ npm run demo:local
 npm run dev
 ```
 
-Open /walkthrough for an interactive, browser-only replay of the synthetic quantity example. Apply the prepared patch, inspect additional inputs, and remove the repair. This interface does not launch a live Solari run.
+Open /walkthrough for recorded Solari results from three public open-source bugs. Inspect an incomplete patch that passes the reported reproduction but fails additional checks, a better candidate, and a byte-for-byte undo. The interface reads saved run results; it does not launch billable sessions. The original synthetic introduction remains at /synthetic.
 
-Open /demo for six anonymized real-code case studies. These are author-reported summaries of private runs, not independently verifiable public receipts. Client code, identities, ticket references, original amounts, precise dates and raw receipt fingerprints are deliberately absent.
+Open /demo for the public evidence and /case-studies for six earlier anonymized real-code summaries. Those earlier cases are author-reported summaries of private runs, not independently verifiable public receipts. Client code, identities, ticket references, original amounts, precise dates and raw receipt fingerprints are deliberately absent.
+
+## Reproduce the open-source cases
+
+Node 22.13+ and Git are required. From a fresh checkout:
+
+```sh
+git clone https://github.com/aribradshaw/quorumpatch.git
+cd quorumpatch
+npm ci
+npm run proof:local
+```
+
+For isolated Solari execution, set `SOLARI_API_KEY` in your environment (or an ignored `.env.local` containing only that key), then:
+
+```sh
+npm run proof:cloud
+# Optional single case:
+npm run proof:cloud -- --case=bytes
+```
+
+Cloud mode creates six short-lived sandboxes per case, eighteen for the full suite, and incurs provider usage. Local mode runs processes, not security sandboxes. Neither mode sends credentials into the test process. Only the three reviewed, pinned public modules are fetched; do not generalize local mode to arbitrary untrusted repositories.
+
+| Case | Upstream report | Candidate scope | Bad-fix control |
+| --- | --- | --- | --- |
+| bytes | [Decimal formatting](https://github.com/visionmedia/bytes.js/issues/69) | Trailing fractional zero trimming | Breaks fixed-decimal mode |
+| pluralize | [Camel-case uncountables](https://github.com/plurals/pluralize/issues/215) | Final camel-case uncountable token and predicates | Fixes Series only |
+| ms | [Scientific-notation roundtrip](https://github.com/vercel/ms/issues/284) | Signed exponent parsing | Accepts positive exponents only |
+
+Each source revision and SHA-256 is pinned in `scripts/open-source-cases.mjs`. Source drift stops the run. For `ms`, the full pinned TypeScript module is transpiled using the lockfile's esbuild before upload. The original source, prepared candidate and patch are saved under `outputs/opensource/<case>/`. Each downloaded upstream MIT license is retained. Apply a downloaded patch with `git apply` from a checkout of the corresponding pinned upstream commit.
+
+The run writes `outputs/opensource/results.json`: assertion-level expected/actual values, source and uploaded-file hashes, stage duration (excluding provisioning), and cleanup status. A successful report means all six expected outcomes occurred, including intentional assertion failures. Infrastructure errors, invalid reports, hash mismatches, timeouts and cleanup failures block the run. After review, `npm run proof:cloud -- --publish` refreshes the public results and patch downloads only when all three cases succeed. Ordinary runs never overwrite the published evidence.
+
+The deliberately incomplete patches are controls written for this demonstration, not rejected upstream contributions or claims about another agent. Candidate patches and checks share an author. These scoped checks are not the full upstream suites, independent attestation, or proof of universal correctness. No upstream PR has been submitted. Historical evidence is pinned; an open issue may later be fixed elsewhere.
+
+### Inspect the evidence
+
+- [Saved cloud output](public/open-source-results.json)
+- [Candidate patches and licenses](public/patches/)
+- [Failure-path tests](tests/proof-core.test.mjs)
+- `npm test` checks result consistency and failure handling without a cloud key.
+- [82-second silent walkthrough](public/quorumpatch-demo.webm): actual interface replay of the saved cloud results, with on-screen explanations.
 
 The independently runnable example is original synthetic code, not a reconstruction of any client's implementation. Local mode is process isolation, not a security sandbox. Optional cloud mode launches four separate Solari sandboxes, verifies uploaded bytes and releases them:
 

@@ -1,0 +1,744 @@
+{
+  "schemaVersion": 1,
+  "mode": "solari-cloud",
+  "recordedAt": "2026-09-17T08:29:31.668Z",
+  "independentAttestation": false,
+  "independentTestAuthors": false,
+  "autonomousRepair": false,
+  "upstreamSubmitted": false,
+  "cases": [
+    {
+      "id": "bytes",
+      "name": "bytes",
+      "title": "Keep the precision. Drop the extra zeros.",
+      "repo": "visionmedia/bytes.js",
+      "commit": "9ddc13b6c66e0cb293616fba246e05db4b6cef4d",
+      "path": "index.js",
+      "issue": 69,
+      "sha256": "893fcbbbe962dc00e40dc2e4b20e76e92d874dd257345003c6575d940e91a37f",
+      "problem": "Formatting 1075 bytes with three decimal places leaves an unwanted trailing zero.",
+      "fix": "Trim trailing fractional zeros while preserving internal zeros and fixed-decimal mode.",
+      "trap": "Converting every formatted value to a number fixes the report, but strips explicitly requested fixed decimals.",
+      "before": "1.050KB",
+      "after": "1.05KB",
+      "issueURL": "https://github.com/visionmedia/bytes.js/issues/69",
+      "sourceURL": "https://github.com/visionmedia/bytes.js/blob/9ddc13b6c66e0cb293616fba246e05db4b6cef4d/index.js",
+      "licenseURL": "https://raw.githubusercontent.com/visionmedia/bytes.js/9ddc13b6c66e0cb293616fba246e05db4b6cef4d/LICENSE",
+      "candidateSha256": "8f7ff7f9dbefd81e9d5479c248cf84f0b6a2c59024d0c70b1b25c4c8490c5afd",
+      "stages": [
+        {
+          "id": "original",
+          "expectation": "fail",
+          "sourceSha256": "893fcbbbe962dc00e40dc2e4b20e76e92d874dd257345003c6575d940e91a37f",
+          "artifacts": {
+            "subject.cjs": "893fcbbbe962dc00e40dc2e4b20e76e92d874dd257345003c6575d940e91a37f",
+            "check.cjs": "037223994652fc2ac708d2272574ce3af8a8523faecf2826d616564654d0c59b",
+            "LICENSE": "e3b44af066615de2ea48d18d852d0762f18c0b2efcea714fa48a6f729d405b85"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "reported-format",
+              "expected": "1.05KB",
+              "actual": "1.050KB",
+              "pass": false
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 1021
+        },
+        {
+          "id": "bad-repro",
+          "expectation": "pass",
+          "sourceSha256": "725b43f455cf44ea4c57b250569559408400e96b20ecfe158ccebed60a8cf12c",
+          "artifacts": {
+            "subject.cjs": "725b43f455cf44ea4c57b250569559408400e96b20ecfe158ccebed60a8cf12c",
+            "check.cjs": "037223994652fc2ac708d2272574ce3af8a8523faecf2826d616564654d0c59b",
+            "LICENSE": "e3b44af066615de2ea48d18d852d0762f18c0b2efcea714fa48a6f729d405b85"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "reported-format",
+              "expected": "1.05KB",
+              "actual": "1.05KB",
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 915
+        },
+        {
+          "id": "bad-checks",
+          "expectation": "fail",
+          "sourceSha256": "725b43f455cf44ea4c57b250569559408400e96b20ecfe158ccebed60a8cf12c",
+          "artifacts": {
+            "subject.cjs": "725b43f455cf44ea4c57b250569559408400e96b20ecfe158ccebed60a8cf12c",
+            "check.cjs": "b94f2b2b75c7d331f83ed820dc0a5d1f63b07494292608ae2d0b388f6316e074",
+            "LICENSE": "e3b44af066615de2ea48d18d852d0762f18c0b2efcea714fa48a6f729d405b85"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "fixed-decimals",
+              "expected": "1.050KB",
+              "actual": "1.05KB",
+              "pass": false
+            },
+            {
+              "id": "internal-zero",
+              "expected": "1.000977KB",
+              "actual": "1.000977KB",
+              "pass": true
+            },
+            {
+              "id": "ordinary-fraction",
+              "expected": "1.5KB",
+              "actual": "1.5KB",
+              "pass": true
+            },
+            {
+              "id": "integer",
+              "expected": "1KB",
+              "actual": "1KB",
+              "pass": true
+            },
+            {
+              "id": "negative",
+              "expected": "-1.05KB",
+              "actual": "-1.05KB",
+              "pass": true
+            },
+            {
+              "id": "separator",
+              "expected": "1.05 KB",
+              "actual": "1.05 KB",
+              "pass": true
+            },
+            {
+              "id": "zero-precision",
+              "expected": "1KB",
+              "actual": "1KB",
+              "pass": true
+            },
+            {
+              "id": "parse-regression",
+              "expected": 1536,
+              "actual": 1536,
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 895
+        },
+        {
+          "id": "patch-repro",
+          "expectation": "pass",
+          "sourceSha256": "8f7ff7f9dbefd81e9d5479c248cf84f0b6a2c59024d0c70b1b25c4c8490c5afd",
+          "artifacts": {
+            "subject.cjs": "8f7ff7f9dbefd81e9d5479c248cf84f0b6a2c59024d0c70b1b25c4c8490c5afd",
+            "check.cjs": "037223994652fc2ac708d2272574ce3af8a8523faecf2826d616564654d0c59b",
+            "LICENSE": "e3b44af066615de2ea48d18d852d0762f18c0b2efcea714fa48a6f729d405b85"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "reported-format",
+              "expected": "1.05KB",
+              "actual": "1.05KB",
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 904
+        },
+        {
+          "id": "patch-checks",
+          "expectation": "pass",
+          "sourceSha256": "8f7ff7f9dbefd81e9d5479c248cf84f0b6a2c59024d0c70b1b25c4c8490c5afd",
+          "artifacts": {
+            "subject.cjs": "8f7ff7f9dbefd81e9d5479c248cf84f0b6a2c59024d0c70b1b25c4c8490c5afd",
+            "check.cjs": "b94f2b2b75c7d331f83ed820dc0a5d1f63b07494292608ae2d0b388f6316e074",
+            "LICENSE": "e3b44af066615de2ea48d18d852d0762f18c0b2efcea714fa48a6f729d405b85"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "fixed-decimals",
+              "expected": "1.050KB",
+              "actual": "1.050KB",
+              "pass": true
+            },
+            {
+              "id": "internal-zero",
+              "expected": "1.000977KB",
+              "actual": "1.000977KB",
+              "pass": true
+            },
+            {
+              "id": "ordinary-fraction",
+              "expected": "1.5KB",
+              "actual": "1.5KB",
+              "pass": true
+            },
+            {
+              "id": "integer",
+              "expected": "1KB",
+              "actual": "1KB",
+              "pass": true
+            },
+            {
+              "id": "negative",
+              "expected": "-1.05KB",
+              "actual": "-1.05KB",
+              "pass": true
+            },
+            {
+              "id": "separator",
+              "expected": "1.05 KB",
+              "actual": "1.05 KB",
+              "pass": true
+            },
+            {
+              "id": "zero-precision",
+              "expected": "1KB",
+              "actual": "1KB",
+              "pass": true
+            },
+            {
+              "id": "parse-regression",
+              "expected": 1536,
+              "actual": 1536,
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 884
+        },
+        {
+          "id": "undo",
+          "expectation": "fail",
+          "sourceSha256": "893fcbbbe962dc00e40dc2e4b20e76e92d874dd257345003c6575d940e91a37f",
+          "artifacts": {
+            "subject.cjs": "893fcbbbe962dc00e40dc2e4b20e76e92d874dd257345003c6575d940e91a37f",
+            "check.cjs": "037223994652fc2ac708d2272574ce3af8a8523faecf2826d616564654d0c59b",
+            "LICENSE": "e3b44af066615de2ea48d18d852d0762f18c0b2efcea714fa48a6f729d405b85"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "reported-format",
+              "expected": "1.05KB",
+              "actual": "1.050KB",
+              "pass": false
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 930
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "pluralize",
+      "name": "pluralize",
+      "title": "A table name should stay a table name.",
+      "repo": "plurals/pluralize",
+      "commit": "1c42761e49f7a78b756841528d99dfbbca8d903c",
+      "path": "pluralize.js",
+      "issue": 215,
+      "sha256": "23e100b090cd7e49579a34cd6e83e1bae0f03c81566db603d4ff84de50bdca0d",
+      "problem": "Singularizing TimeSeries produces TimeSery, breaking the intended model name.",
+      "fix": "Respect an uncountable final camel-case token without losing its original case.",
+      "trap": "A Series-only exception passes the report but still damages other uncountable camel-case endings.",
+      "before": "TimeSery",
+      "after": "TimeSeries",
+      "issueURL": "https://github.com/plurals/pluralize/issues/215",
+      "sourceURL": "https://github.com/plurals/pluralize/blob/1c42761e49f7a78b756841528d99dfbbca8d903c/pluralize.js",
+      "licenseURL": "https://raw.githubusercontent.com/plurals/pluralize/1c42761e49f7a78b756841528d99dfbbca8d903c/LICENSE",
+      "candidateSha256": "bfec5436a2bc608b460307a3b7ba3222fb6afa81076ff3bbe372bf82f3c355a8",
+      "stages": [
+        {
+          "id": "original",
+          "expectation": "fail",
+          "sourceSha256": "23e100b090cd7e49579a34cd6e83e1bae0f03c81566db603d4ff84de50bdca0d",
+          "artifacts": {
+            "subject.cjs": "23e100b090cd7e49579a34cd6e83e1bae0f03c81566db603d4ff84de50bdca0d",
+            "check.cjs": "1d7de7b417a45100e766a4aad3f6a1056e9c340ba89499547dd575c321aa9eae",
+            "LICENSE": "5822e0d816e53e3537b306a4132cb7a70881897cf51bf483282148a602979076"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "reported-name",
+              "expected": "TimeSeries",
+              "actual": "TimeSery",
+              "pass": false
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 844
+        },
+        {
+          "id": "bad-repro",
+          "expectation": "pass",
+          "sourceSha256": "dd22d4ce93e667d9da06beda309ff4d508c8bd4eb366e16f9fca20b5f98467e3",
+          "artifacts": {
+            "subject.cjs": "dd22d4ce93e667d9da06beda309ff4d508c8bd4eb366e16f9fca20b5f98467e3",
+            "check.cjs": "1d7de7b417a45100e766a4aad3f6a1056e9c340ba89499547dd575c321aa9eae",
+            "LICENSE": "5822e0d816e53e3537b306a4132cb7a70881897cf51bf483282148a602979076"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "reported-name",
+              "expected": "TimeSeries",
+              "actual": "TimeSeries",
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 984
+        },
+        {
+          "id": "bad-checks",
+          "expectation": "fail",
+          "sourceSha256": "dd22d4ce93e667d9da06beda309ff4d508c8bd4eb366e16f9fca20b5f98467e3",
+          "artifacts": {
+            "subject.cjs": "dd22d4ce93e667d9da06beda309ff4d508c8bd4eb366e16f9fca20b5f98467e3",
+            "check.cjs": "3655392545ac0db4b0f710dd0f88f462d57fc37fffd0118be5335d57f2f1bee6",
+            "LICENSE": "5822e0d816e53e3537b306a4132cb7a70881897cf51bf483282148a602979076"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "other-uncountable",
+              "expected": "LatestNews",
+              "actual": "LatestNew",
+              "pass": false
+            },
+            {
+              "id": "plural-uncountable",
+              "expected": "OfficeEquipment",
+              "actual": "OfficeEquipments",
+              "pass": false
+            },
+            {
+              "id": "singular-predicate",
+              "expected": true,
+              "actual": false,
+              "pass": false
+            },
+            {
+              "id": "plural-predicate",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "plain-series",
+              "expected": "Series",
+              "actual": "Series",
+              "pass": true
+            },
+            {
+              "id": "ordinary-camel",
+              "expected": "UserAccount",
+              "actual": "UserAccount",
+              "pass": true
+            },
+            {
+              "id": "regular-word",
+              "expected": "cities",
+              "actual": "cities",
+              "pass": true
+            },
+            {
+              "id": "empty-string",
+              "expected": "",
+              "actual": "",
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 993
+        },
+        {
+          "id": "patch-repro",
+          "expectation": "pass",
+          "sourceSha256": "bfec5436a2bc608b460307a3b7ba3222fb6afa81076ff3bbe372bf82f3c355a8",
+          "artifacts": {
+            "subject.cjs": "bfec5436a2bc608b460307a3b7ba3222fb6afa81076ff3bbe372bf82f3c355a8",
+            "check.cjs": "1d7de7b417a45100e766a4aad3f6a1056e9c340ba89499547dd575c321aa9eae",
+            "LICENSE": "5822e0d816e53e3537b306a4132cb7a70881897cf51bf483282148a602979076"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "reported-name",
+              "expected": "TimeSeries",
+              "actual": "TimeSeries",
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 1233
+        },
+        {
+          "id": "patch-checks",
+          "expectation": "pass",
+          "sourceSha256": "bfec5436a2bc608b460307a3b7ba3222fb6afa81076ff3bbe372bf82f3c355a8",
+          "artifacts": {
+            "subject.cjs": "bfec5436a2bc608b460307a3b7ba3222fb6afa81076ff3bbe372bf82f3c355a8",
+            "check.cjs": "3655392545ac0db4b0f710dd0f88f462d57fc37fffd0118be5335d57f2f1bee6",
+            "LICENSE": "5822e0d816e53e3537b306a4132cb7a70881897cf51bf483282148a602979076"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "other-uncountable",
+              "expected": "LatestNews",
+              "actual": "LatestNews",
+              "pass": true
+            },
+            {
+              "id": "plural-uncountable",
+              "expected": "OfficeEquipment",
+              "actual": "OfficeEquipment",
+              "pass": true
+            },
+            {
+              "id": "singular-predicate",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "plural-predicate",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "plain-series",
+              "expected": "Series",
+              "actual": "Series",
+              "pass": true
+            },
+            {
+              "id": "ordinary-camel",
+              "expected": "UserAccount",
+              "actual": "UserAccount",
+              "pass": true
+            },
+            {
+              "id": "regular-word",
+              "expected": "cities",
+              "actual": "cities",
+              "pass": true
+            },
+            {
+              "id": "empty-string",
+              "expected": "",
+              "actual": "",
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 913
+        },
+        {
+          "id": "undo",
+          "expectation": "fail",
+          "sourceSha256": "23e100b090cd7e49579a34cd6e83e1bae0f03c81566db603d4ff84de50bdca0d",
+          "artifacts": {
+            "subject.cjs": "23e100b090cd7e49579a34cd6e83e1bae0f03c81566db603d4ff84de50bdca0d",
+            "check.cjs": "1d7de7b417a45100e766a4aad3f6a1056e9c340ba89499547dd575c321aa9eae",
+            "LICENSE": "5822e0d816e53e3537b306a4132cb7a70881897cf51bf483282148a602979076"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "reported-name",
+              "expected": "TimeSeries",
+              "actual": "TimeSery",
+              "pass": false
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 990
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "ms",
+      "name": "ms",
+      "title": "Parse the duration you just formatted.",
+      "repo": "vercel/ms",
+      "commit": "4ff48cec099f0514c3e9bbca18706c9c21122bfb",
+      "path": "src/index.ts",
+      "issue": 284,
+      "sha256": "e1a602896c1433dcebc88cb0e075733c51ea036533296d4df513e417cf9d387e",
+      "problem": "Very large durations format with an exponent, which the parser does not recognize.",
+      "fix": "Accept an optional signed exponent in the numeric part, preserving unit validation.",
+      "trap": "Accepting only positive exponents fixes a large duration but rejects small exponential values.",
+      "before": "NaN",
+      "after": "Finite duration",
+      "issueURL": "https://github.com/vercel/ms/issues/284",
+      "sourceURL": "https://github.com/vercel/ms/blob/4ff48cec099f0514c3e9bbca18706c9c21122bfb/src/index.ts",
+      "licenseURL": "https://raw.githubusercontent.com/vercel/ms/4ff48cec099f0514c3e9bbca18706c9c21122bfb/LICENSE",
+      "candidateSha256": "f90f8a73754bd85a571a07bf2939080a009dc0358f3d74bac7e789d13ee2b73e",
+      "stages": [
+        {
+          "id": "original",
+          "expectation": "fail",
+          "sourceSha256": "e1a602896c1433dcebc88cb0e075733c51ea036533296d4df513e417cf9d387e",
+          "artifacts": {
+            "subject.cjs": "bffb448bf2d51c9aab480e8220826c1d8f01e03f7ec1b2ca107206d017b4b017",
+            "check.cjs": "58952e18b4efeeb0355c4faefc6ef51f60e78f75f2303f38d932939397cdc4a2",
+            "LICENSE": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "reported-roundtrip",
+              "expected": true,
+              "actual": false,
+              "pass": false
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 905
+        },
+        {
+          "id": "bad-repro",
+          "expectation": "pass",
+          "sourceSha256": "df6bbe304763a0f78a83e6cc245a3e49972aed8ea4d7fedff2d3d7587374a812",
+          "artifacts": {
+            "subject.cjs": "65f032a5a0db2ec26bde021a804a449be7267d4d4ee7fd22900fb59070302db6",
+            "check.cjs": "58952e18b4efeeb0355c4faefc6ef51f60e78f75f2303f38d932939397cdc4a2",
+            "LICENSE": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "reported-roundtrip",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 961
+        },
+        {
+          "id": "bad-checks",
+          "expectation": "fail",
+          "sourceSha256": "df6bbe304763a0f78a83e6cc245a3e49972aed8ea4d7fedff2d3d7587374a812",
+          "artifacts": {
+            "subject.cjs": "65f032a5a0db2ec26bde021a804a449be7267d4d4ee7fd22900fb59070302db6",
+            "check.cjs": "add7b7cc9ed12292d871ae49440f214ee3618948c141b35db1c6785db9de9e0a",
+            "LICENSE": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "negative-exponent",
+              "expected": 1,
+              "actual": null,
+              "pass": false
+            },
+            {
+              "id": "unsigned-exponent",
+              "expected": 1000,
+              "actual": null,
+              "pass": false
+            },
+            {
+              "id": "uppercase-exponent",
+              "expected": 2000,
+              "actual": 2000,
+              "pass": true
+            },
+            {
+              "id": "negative-value",
+              "expected": -1,
+              "actual": null,
+              "pass": false
+            },
+            {
+              "id": "ordinary-units",
+              "expected": 7200000,
+              "actual": 7200000,
+              "pass": true
+            },
+            {
+              "id": "bad-exponent",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "bad-unit",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "roundtrip-tolerance",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 915
+        },
+        {
+          "id": "patch-repro",
+          "expectation": "pass",
+          "sourceSha256": "f90f8a73754bd85a571a07bf2939080a009dc0358f3d74bac7e789d13ee2b73e",
+          "artifacts": {
+            "subject.cjs": "f8d1268113e254ab9da9d994d781899cdb3d807cef76b68b29040e356fea21ff",
+            "check.cjs": "58952e18b4efeeb0355c4faefc6ef51f60e78f75f2303f38d932939397cdc4a2",
+            "LICENSE": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "reported-roundtrip",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 1030
+        },
+        {
+          "id": "patch-checks",
+          "expectation": "pass",
+          "sourceSha256": "f90f8a73754bd85a571a07bf2939080a009dc0358f3d74bac7e789d13ee2b73e",
+          "artifacts": {
+            "subject.cjs": "f8d1268113e254ab9da9d994d781899cdb3d807cef76b68b29040e356fea21ff",
+            "check.cjs": "add7b7cc9ed12292d871ae49440f214ee3618948c141b35db1c6785db9de9e0a",
+            "LICENSE": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "pass",
+          "checks": [
+            {
+              "id": "negative-exponent",
+              "expected": 1,
+              "actual": 1,
+              "pass": true
+            },
+            {
+              "id": "unsigned-exponent",
+              "expected": 1000,
+              "actual": 1000,
+              "pass": true
+            },
+            {
+              "id": "uppercase-exponent",
+              "expected": 2000,
+              "actual": 2000,
+              "pass": true
+            },
+            {
+              "id": "negative-value",
+              "expected": -1,
+              "actual": -1,
+              "pass": true
+            },
+            {
+              "id": "ordinary-units",
+              "expected": 7200000,
+              "actual": 7200000,
+              "pass": true
+            },
+            {
+              "id": "bad-exponent",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "bad-unit",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            },
+            {
+              "id": "roundtrip-tolerance",
+              "expected": true,
+              "actual": true,
+              "pass": true
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 949
+        },
+        {
+          "id": "undo",
+          "expectation": "fail",
+          "sourceSha256": "e1a602896c1433dcebc88cb0e075733c51ea036533296d4df513e417cf9d387e",
+          "artifacts": {
+            "subject.cjs": "bffb448bf2d51c9aab480e8220826c1d8f01e03f7ec1b2ca107206d017b4b017",
+            "check.cjs": "58952e18b4efeeb0355c4faefc6ef51f60e78f75f2303f38d932939397cdc4a2",
+            "LICENSE": "ee765244e2d59f5234d474f62e0766fa0c8b99af967fdd4c0cb8dcb0c76ea224"
+          },
+          "remoteHashesVerified": true,
+          "verdict": "confirmed",
+          "outcome": "fail",
+          "checks": [
+            {
+              "id": "reported-roundtrip",
+              "expected": true,
+              "actual": false,
+              "pass": false
+            }
+          ],
+          "cleanupConfirmed": true,
+          "durationMs": 959
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true
+}

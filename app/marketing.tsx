@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import ProductShell from './product-shell';
+import results from '../public/open-source-results.json';
 export default function Marketing() {
   return (
     <ProductShell>
@@ -17,37 +18,52 @@ export default function Marketing() {
             Try the walkthrough <ArrowRight size={18} />
           </Link>
           <Link href="/demo">Inspect the evidence</Link>
+          <a href="/quorumpatch-demo.webm">Watch 82-second demo</a>
         </div>
       </section>
       <Link className="qp-preview" href="/walkthrough">
         <div className="qp-panel-bar">
-          <span>QUANTITY BUG</span>
-          <span>Interactive walkthrough ↗</span>
+          <span>BYTES / OPEN-SOURCE CASE</span>
+          <span>Recorded Solari run ↗</span>
         </div>
         <div className="qp-preview-body">
           <div>
-            <span className="qp-label">One small change.</span>
+            <span className="qp-label">
+              The test passed. The patch wasn’t ready.
+            </span>
             <h2>
-              Three items.
+              Fix one number.
               <br />
-              One item’s price.
+              Break another.
             </h2>
             <code>
-              return unit <span className="qp-good">* quantity</span>;
+              1.050KB <span className="qp-good">→ 1.05KB</span>
             </code>
           </div>
           <div className="qp-preview-results">
             <div>
-              <span>Original</span>
-              <b className="qp-bad">$1.25</b>
+              <span>Quick fix / reported bug</span>
+              <b className="qp-good">
+                {results.cases[0].stages[1].outcome === 'pass'
+                  ? 'Pass'
+                  : 'Fail'}
+              </b>
             </div>
             <div>
-              <span>Patched</span>
-              <b className="qp-good">$3.75</b>
+              <span>Quick fix / extra checks</span>
+              <b className="qp-bad">
+                {results.cases[0].stages[2].outcome === 'fail'
+                  ? 'Rejected'
+                  : 'Passed'}
+              </b>
             </div>
             <div>
-              <span>Fix removed</span>
-              <b className="qp-bad">$1.25</b>
+              <span>Better patch / extra checks</span>
+              <b className="qp-good">
+                {results.cases[0].stages[4].outcome === 'pass'
+                  ? 'Pass'
+                  : 'Fail'}
+              </b>
             </div>
           </div>
         </div>

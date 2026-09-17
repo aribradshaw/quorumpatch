@@ -1,3 +1,5 @@
 * text=auto
 .githooks/* text eol=lf
 *.png binary
+public/patches/*.patch text eol=lf -whitespace
+public/quorumpatch-demo.webm binary

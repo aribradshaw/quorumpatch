@@ -5,7 +5,7 @@ const allowed = /^(?:app\/|public\/|scripts\/|tests\/|config\/|\.github\/workflo
 const forbiddenPath = /(?:^|\/)(?:\.env[^/]*|outputs|evidence|candidates|monitor|node_modules|\.openai)(?:\/|$)|\.(?:mp4|pdf|zip|pem|key)$/i;
 const patterns = [
   /-----BEGIN (?:RSA |EC )?PRIVATE KEY-----/,
-  /(?:sk_live_|sb_secret_|gh[pousr]_)[A-Za-z0-9]{20,}/,
+  /(?:sk_live_|slr_live_|sb_secret_|gh[pousr]_)[A-Za-z0-9_-]{20,}/,
   /eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}/,
   /postgres(?:ql)?:\/\/[^\s]+:[^\s]+@/,
   /https?:\/\/[^\s"']+\.supabase\.co/i,
@@ -14,6 +14,8 @@ const patterns = [
 ];
 function scan(name, bytes) {
   if (!allowed.test(name) || forbiddenPath.test(name)) throw new Error('Unapproved public path: ' + name);
+  // Explicitly reviewed recording of public-only UI and saved open-source runs.
+  if (name === 'public/quorumpatch-demo.webm') return;
   if (/\.(png|svg)$/.test(name)) {
     if (!['public/quorumpatch-mark.png', 'public/favicon.svg'].includes(name)) throw new Error('Unreviewed asset: ' + name);
     return;

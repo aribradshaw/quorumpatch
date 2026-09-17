@@ -580,3 +580,128 @@
     transition: none !important;
   }
 }
+.qp-projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 24px;
+}
+.qp-projects button {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.qp-projects button[aria-pressed='true'] {
+  background: var(--surface);
+  border-color: var(--ink);
+}
+.qp-projects span {
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+.qp-projects small {
+  font-size: 13px;
+  color: var(--muted);
+}
+.qp-result-label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.qp-observed {
+  margin-top: 24px;
+}
+.qp-observed-head,
+.qp-observed-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.qp-observed-head {
+  color: var(--muted);
+  font-size: 12px;
+}
+.qp-observed-row code {
+  font-size: 13px;
+}
+.qp-observed-row > span {
+  text-transform: capitalize;
+}
+.qp-reproduce {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 34px 0 20px;
+  align-items: start;
+}
+.qp-reproduce h2 {
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+}
+.qp-reproduce p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+.qp-copy {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--wash);
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+.qp-copy code {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.qp-copy button {
+  flex-shrink: 0;
+}
+.qp details code {
+  overflow-wrap: anywhere;
+}
+.qp-details-links {
+  flex-wrap: wrap;
+}
+@media (max-width: 700px) {
+  .qp-projects {
+    gap: 8px;
+  }
+  .qp-projects button {
+    padding: 14px 10px;
+  }
+  .qp-projects span {
+    font-size: 17px;
+  }
+  .qp-projects small {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  }
+  .qp-reproduce {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .qp-observed-head,
+  .qp-observed-row {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .qp-observed-row code {
+    font-size: 12px;
+  }
+}

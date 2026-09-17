@@ -1,1 +1,1 @@
-export { default } from '../proof-demo';
+export { default } from '../open-source-proof';
