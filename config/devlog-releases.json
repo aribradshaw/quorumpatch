@@ -1,5 +1,23 @@
 [
   {
+    "version": "2026.9.4",
+    "date": "2026-09-18",
+    "releasedAt": "2026-09-18T16:20:04.713Z",
+    "commit": "3c627aee2b23049336f3cb0f203d3838e2a3170a",
+    "sourceSubject": "feat:solari-snapshot-and-browser-proof",
+    "title": "solari-snapshot-and-browser-proof",
+    "summary": "Production now includes: solari-snapshot-and-browser-proof.",
+    "notes": [
+      "solari-snapshot-and-browser-proof"
+    ],
+    "author": {
+      "name": "Ari Bradshaw",
+      "githubLogin": null,
+      "avatarUrl": null,
+      "profileUrl": null
+    }
+  },
+  {
     "version": "2026.9.3",
     "date": "2026-09-17",
     "releasedAt": "2026-09-17T08:50:24.928Z",
