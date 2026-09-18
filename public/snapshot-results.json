@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 1,
+  "kind": "synthetic-snapshot-experiment",
+  "startedAt": "2026-09-18T15:58:38.125Z",
+  "stages": [
+    {
+      "name": "prepare",
+      "pass": true,
+      "durationMs": 4463,
+      "sourceSha256": "e6e44fbdd458b7136e9e909dc5df1bb2580a5b6deaebb7d525c3f2c4a674b2bd"
+    },
+    {
+      "name": "snapshot",
+      "pass": true,
+      "durationMs": 30466,
+      "providerReadback": true
+    },
+    {
+      "name": "original-fork",
+      "pass": true,
+      "durationMs": 22777,
+      "assessment": {
+        "verdict": "confirmed",
+        "outcome": "fail",
+        "checks": [
+          {
+            "id": "partial-retry",
+            "expected": [
+              "incomplete",
+              true,
+              "complete",
+              "A,B,B",
+              "r-B"
+            ],
+            "actual": [
+              "incomplete",
+              false,
+              "complete",
+              "A,B,A,B",
+              "r-B"
+            ],
+            "pass": false
+          },
+          {
+            "id": "unknown-is-not-retried",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              "A,B"
+            ],
+            "actual": {
+              "error": "candidate-threw"
+            },
+            "pass": false
+          },
+          {
+            "id": "missing-receipt-is-unknown",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": [
+              "complete",
+              "complete",
+              "accepted",
+              2
+            ],
+            "pass": false
+          },
+          {
+            "id": "unrecognized-response",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": {
+              "error": "candidate-threw"
+            },
+            "pass": false
+          },
+          {
+            "id": "preexisting-malformed-entry",
+            "expected": [
+              "incomplete",
+              0
+            ],
+            "actual": [
+              "complete",
+              1
+            ],
+            "pass": false
+          },
+          {
+            "id": "accepted-and-unrelated-preserved",
+            "expected": [
+              "complete",
+              1,
+              "old",
+              "unknown"
+            ],
+            "actual": [
+              "complete",
+              2,
+              "new",
+              "unknown"
+            ],
+            "pass": false
+          },
+          {
+            "id": "empty-batch",
+            "expected": [
+              "complete"
+            ],
+            "actual": [
+              "complete"
+            ],
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "browser-original",
+      "pass": true,
+      "durationMs": 12969,
+      "observedSendOrder": "A → B → A → B",
+      "expectedSendOrder": "A → B → A → B",
+      "browserAssertionsPassed": true
+    },
+    {
+      "name": "contaminate-first-fork",
+      "pass": true,
+      "durationMs": 149,
+      "markerPresent": true
+    },
+    {
+      "name": "incomplete-fork",
+      "pass": true,
+      "durationMs": 34920,
+      "assessment": {
+        "verdict": "confirmed",
+        "outcome": "fail",
+        "checks": [
+          {
+            "id": "partial-retry",
+            "expected": [
+              "incomplete",
+              true,
+              "complete",
+              "A,B,B",
+              "r-B"
+            ],
+            "actual": [
+              "incomplete",
+              true,
+              "complete",
+              "A,B,B",
+              "r-B"
+            ],
+            "pass": true
+          },
+          {
+            "id": "unknown-is-not-retried",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              "A,B"
+            ],
+            "actual": [
+              "incomplete",
+              "incomplete",
+              null,
+              "A,B,B"
+            ],
+            "pass": false
+          },
+          {
+            "id": "missing-receipt-is-unknown",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": [
+              "complete",
+              "complete",
+              "accepted",
+              1
+            ],
+            "pass": false
+          },
+          {
+            "id": "unrecognized-response",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": [
+              "incomplete",
+              "incomplete",
+              null,
+              2
+            ],
+            "pass": false
+          },
+          {
+            "id": "preexisting-malformed-entry",
+            "expected": [
+              "incomplete",
+              0
+            ],
+            "actual": [
+              "complete",
+              0
+            ],
+            "pass": false
+          },
+          {
+            "id": "accepted-and-unrelated-preserved",
+            "expected": [
+              "complete",
+              1,
+              "old",
+              "unknown"
+            ],
+            "actual": [
+              "complete",
+              1,
+              "old",
+              "unknown"
+            ],
+            "pass": true
+          },
+          {
+            "id": "empty-batch",
+            "expected": [
+              "complete"
+            ],
+            "actual": [
+              "complete"
+            ],
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "fresh-fork-separation",
+      "pass": true,
+      "durationMs": 34503,
+      "marker": false,
+      "providerKeyPresent": false
+    },
+    {
+      "name": "candidate",
+      "pass": true,
+      "durationMs": 1212,
+      "assessment": {
+        "verdict": "confirmed",
+        "outcome": "pass",
+        "checks": [
+          {
+            "id": "partial-retry",
+            "expected": [
+              "incomplete",
+              true,
+              "complete",
+              "A,B,B",
+              "r-B"
+            ],
+            "actual": [
+              "incomplete",
+              true,
+              "complete",
+              "A,B,B",
+              "r-B"
+            ],
+            "pass": true
+          },
+          {
+            "id": "unknown-is-not-retried",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              "A,B"
+            ],
+            "actual": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              "A,B"
+            ],
+            "pass": true
+          },
+          {
+            "id": "missing-receipt-is-unknown",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "pass": true
+          },
+          {
+            "id": "unrecognized-response",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "pass": true
+          },
+          {
+            "id": "preexisting-malformed-entry",
+            "expected": [
+              "incomplete",
+              0
+            ],
+            "actual": [
+              "incomplete",
+              0
+            ],
+            "pass": true
+          },
+          {
+            "id": "accepted-and-unrelated-preserved",
+            "expected": [
+              "complete",
+              1,
+              "old",
+              "unknown"
+            ],
+            "actual": [
+              "complete",
+              1,
+              "old",
+              "unknown"
+            ],
+            "pass": true
+          },
+          {
+            "id": "empty-batch",
+            "expected": [
+              "complete"
+            ],
+            "actual": [
+              "complete"
+            ],
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "browser-candidate",
+      "pass": true,
+      "durationMs": 11964,
+      "observedSendOrder": "A → B → B",
+      "expectedSendOrder": "A → B → B",
+      "browserAssertionsPassed": true
+    },
+    {
+      "name": "rewind",
+      "pass": true,
+      "durationMs": 26267,
+      "sourceSha256": "e6e44fbdd458b7136e9e909dc5df1bb2580a5b6deaebb7d525c3f2c4a674b2bd",
+      "contaminationRemoved": true,
+      "assessment": {
+        "verdict": "confirmed",
+        "outcome": "fail",
+        "checks": [
+          {
+            "id": "partial-retry",
+            "expected": [
+              "incomplete",
+              true,
+              "complete",
+              "A,B,B",
+              "r-B"
+            ],
+            "actual": [
+              "incomplete",
+              false,
+              "complete",
+              "A,B,A,B",
+              "r-B"
+            ],
+            "pass": false
+          },
+          {
+            "id": "unknown-is-not-retried",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              "A,B"
+            ],
+            "actual": {
+              "error": "candidate-threw"
+            },
+            "pass": false
+          },
+          {
+            "id": "missing-receipt-is-unknown",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": [
+              "complete",
+              "complete",
+              "accepted",
+              2
+            ],
+            "pass": false
+          },
+          {
+            "id": "unrecognized-response",
+            "expected": [
+              "incomplete",
+              "incomplete",
+              "unknown",
+              1
+            ],
+            "actual": {
+              "error": "candidate-threw"
+            },
+            "pass": false
+          },
+          {
+            "id": "preexisting-malformed-entry",
+            "expected": [
+              "incomplete",
+              0
+            ],
+            "actual": [
+              "complete",
+              1
+            ],
+            "pass": false
+          },
+          {
+            "id": "accepted-and-unrelated-preserved",
+            "expected": [
+              "complete",
+              1,
+              "old",
+              "unknown"
+            ],
+            "actual": [
+              "complete",
+              2,
+              "new",
+              "unknown"
+            ],
+            "pass": false
+          },
+          {
+            "id": "empty-batch",
+            "expected": [
+              "complete"
+            ],
+            "actual": [
+              "complete"
+            ],
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "browser-rewind",
+      "pass": true,
+      "durationMs": 11714,
+      "observedSendOrder": "A → B → A → B",
+      "expectedSendOrder": "A → B → A → B",
+      "browserAssertionsPassed": true
+    }
+  ],
+  "cleanup": [
+    {
+      "resource": "sandbox",
+      "confirmed": true
+    },
+    {
+      "resource": "sandbox",
+      "confirmed": true
+    },
+    {
+      "resource": "sandbox",
+      "confirmed": true
+    },
+    {
+      "resource": "sandbox",
+      "confirmed": true
+    },
+    {
+      "resource": "snapshot",
+      "confirmed": true
+    }
+  ],
+  "pass": true,
+  "limitations": [
+    "Sequential forks from one snapshot, not a concurrent stress test.",
+    "Tests establish specific file and environment boundaries, not a sandbox escape assessment.",
+    "No billing or performance superiority claim."
+  ],
+  "browserReleased": true,
+  "browserRecording": {
+    "downloaded": true,
+    "bytes": 20407,
+    "sanitized": true,
+    "publicSha256": "243bbcc592446a7ee55493c9bb9d64af796c8db9bc59b649b4b5cdfde2eb1c6c",
+    "publicEvents": 69,
+    "note": "Provider DOM replay with endpoint URLs replaced and scripts and nonstandard events removed. Not a video or independent attestation."
+  },
+  "finishedAt": "2026-09-18T16:02:12.525Z"
+}

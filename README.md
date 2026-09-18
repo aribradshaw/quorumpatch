@@ -14,9 +14,28 @@ npm run demo:local
 npm run dev
 ```
 
-Open /walkthrough for recorded Solari results from three public open-source bugs. Inspect an incomplete patch that passes the reported reproduction but fails additional checks, a better candidate, and a byte-for-byte undo. The interface reads saved run results; it does not launch billable sessions. The original synthetic introduction remains at /synthetic.
+Open /walkthrough for the recorded snapshot, fork, browser and rewind experiment. Open /demo for its evidence, and /open-source for the three pinned upstream bug examples. The replay reads sanitized saved DOM events; it does not launch billable sessions. The original synthetic introduction remains at /synthetic.
 
-Open /demo for the public evidence and /case-studies for six earlier anonymized real-code summaries. Those earlier cases are author-reported summaries of private runs, not independently verifiable public receipts. Client code, identities, ticket references, original amounts, precise dates and raw receipt fingerprints are deliberately absent.
+Open /case-studies for six earlier anonymized real-code summaries. Those earlier cases are author-reported summaries of private runs, not independently verifiable public receipts. Client code, identities, ticket references, original amounts, precise dates and raw receipt fingerprints are deliberately absent.
+
+## New: partial success without duplicate retries
+
+An original synthetic workflow now evaluates a separate agent's first repair against checks frozen before task dispatch. The first candidate passes all seven checks; the original resends an already accepted operation. This is an instruction-scoped experiment, not independently authored certification or a filesystem-isolated blind trial.
+
+```sh
+npm ci
+npm run proof:retry
+# Optional remote replay using your SOLARI_API_KEY:
+npm run proof:retry:cloud
+```
+
+[Read the evidence review](public/evidence-review.md) and [four-stage cloud receipt](public/retry-results.json). The review also documents an unresolved mismatch between API-run evidence and console history. No per-run billing claim is made. Local reproduction needs no key; future runs replay the saved first candidate.
+
+## Snapshot and browser experiment
+
+`npm run proof:snapshot:browser` prepares the synthetic retry application, snapshots its running environment, creates sequential forks, and checks the original, a deliberately incomplete control, and the repair. A real Solari browser clicks through the original and repaired application, then checks that rewinding the machine restores the duplicate-send failure. File markers test specific fork-separation and rewind behavior. These are not sandbox escape tests or a general security certification.
+
+This command requires your `SOLARI_API_KEY` and uses provider resources. It saves private provider handles and the raw browser recording only under ignored `outputs/snapshot/`. Do not publish that raw directory. The runner releases its sandboxes, browser session, and snapshot; cleanup or recording failures prevent a successful result. `npm run proof:snapshot` omits the browser and recording. There is no automatic Git push or website deployment.
 
 ## Reproduce the open-source cases
 

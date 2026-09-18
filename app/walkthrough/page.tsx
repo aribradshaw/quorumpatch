@@ -1,4 +1,4 @@
-import OpenSourceProof from '../open-source-proof';
+import SnapshotDemo from '../snapshot-demo';
 export default function WalkthroughPage() {
-  return <OpenSourceProof guided />;
+  return <SnapshotDemo />;
 }

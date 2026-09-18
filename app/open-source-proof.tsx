@@ -91,7 +91,7 @@ export default function OpenSourceProof({
           <a href={item.issueURL}>
             {item.repo} · Issue {item.issue} ↗
           </a>
-          <span>Recorded Solari run</span>
+          <span>Recorded QuorumPatch run</span>
         </div>
         <div className="qp-demo-layout">
           <nav className="qp-stages" aria-label="Recorded stages">
@@ -187,6 +187,43 @@ export default function OpenSourceProof({
           </p>
         </div>
       </section>
+      <section
+        className="qp-reproduce"
+        aria-label="First-attempt repair experiment"
+      >
+        <div>
+          <h2>Retry the failure. Not the success.</h2>
+          <p>
+            A separate agent’s first repair passed seven frozen checks in a
+            synthetic partial-delivery case.
+          </p>
+        </div>
+        <div>
+          <div className="qp-copy">
+            <code>npm run proof:retry</code>
+          </div>
+          <p>No key needed. Replays the saved candidate.</p>
+          <details>
+            <summary>See the evidence</summary>
+            <p>
+              The original sends A twice after B fails. The repair preserves A’s
+              receipt and retries only B. Removing the repair brings the
+              duplicate back.
+            </p>
+            <p>
+              Four recorded cloud stages include file hashes, API readbacks and
+              release checks. Test access was restricted by instructions, not
+              filesystem permissions. This is not independent certification.
+            </p>
+            <div className="qp-details-links">
+              <a href="/retry-results.json" download>
+                Run results ↓
+              </a>
+              <a href="/evidence-review.md">Method & limitations ↗</a>
+            </div>
+          </details>
+        </div>
+      </section>
       <details>
         <summary>Source, patch & run details</summary>
         <div className="qp-details-links">
@@ -217,7 +254,9 @@ export default function OpenSourceProof({
           incomplete controls. This is not independent certification, a full
           upstream test-suite run, or an upstream merge. Results are saved
           output, not a live run. Solari executes each stage in a separate
-          sandbox; uploaded files are hash-checked and sandboxes released.
+          sandbox; uploaded files are hash-checked and sandboxes released. API
+          execution evidence has not yet been reconciled with console history.{' '}
+          <a href="/evidence-review.md">Read the evidence review.</a>
         </p>
       </details>
       <div className="qp-details-links">

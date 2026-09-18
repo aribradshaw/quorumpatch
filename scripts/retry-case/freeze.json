@@ -1,0 +1,10 @@
+{
+  "frozenAt": "2026-09-18T06:44:37.588Z",
+  "checksSha256": "915c6769d065c64553cf984a5dad45d4698754ba7cfecca81cc0d383e1468ad3",
+  "candidateSha256": "71e54383441200e18b3ad6ab9771b05c0fae1161ae23bad862a51bd2f30a0574",
+  "attempts": 1,
+  "testAuthorAndRepairAgentSeparated": true,
+  "filesystemIsolationEnforced": false,
+  "independentAttestation": false,
+  "method": "Checks hashed before task dispatch. Repair agent instructed to read only TASK.md and original.cjs and write one candidate. Visible reproduction allowed. No hidden-test feedback or second attempt. Both agents share a workspace; this is not an access-control guarantee. The coordinator is the test author."
+}

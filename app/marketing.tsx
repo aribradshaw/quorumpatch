@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import ProductShell from './product-shell';
-import results from '../public/open-source-results.json';
+import results from '../public/snapshot-results.json';
 export default function Marketing() {
   return (
     <ProductShell>
@@ -12,62 +12,58 @@ export default function Marketing() {
           <br />
           <em>Prove it.</em>
         </h1>
-        <p>Test the patch. Undo it. See if the bug comes back.</p>
+        <p>
+          Fork the environment. Test the repair. Rewind to prove what changed.
+        </p>
         <div className="qp-actions">
           <Link href="/walkthrough" className="qp-primary">
-            Try the walkthrough <ArrowRight size={18} />
+            Watch the experiment <ArrowRight size={18} />
           </Link>
           <Link href="/demo">Inspect the evidence</Link>
-          <a href="/quorumpatch-demo.webm">Watch 82-second demo</a>
         </div>
       </section>
       <Link className="qp-preview" href="/walkthrough">
         <div className="qp-panel-bar">
-          <span>BYTES / OPEN-SOURCE CASE</span>
-          <span>Recorded Solari run ↗</span>
+          <span>SNAPSHOT → REPAIR → REWIND</span>
+          <span>Recorded QuorumPatch run ↗</span>
         </div>
         <div className="qp-preview-body">
           <div>
             <span className="qp-label">
-              The test passed. The patch wasn’t ready.
+              One starting point. Three versions. A real browser.
             </span>
             <h2>
-              Fix one number.
+              Retry the failure.
               <br />
-              Break another.
+              Not the success.
             </h2>
             <code>
-              1.050KB <span className="qp-good">→ 1.05KB</span>
+              A → B → A → B{' '}
+              <span className="qp-good">/ repaired: A → B → B</span>
             </code>
           </div>
           <div className="qp-preview-results">
             <div>
-              <span>Quick fix / reported bug</span>
+              <span>Original / browser</span>
+              <b className="qp-bad">Duplicate</b>
+            </div>
+            <div>
+              <span>Repair / browser</span>
               <b className="qp-good">
-                {results.cases[0].stages[1].outcome === 'pass'
-                  ? 'Pass'
-                  : 'Fail'}
+                {results.pass ? 'Verified' : 'Unconfirmed'}
               </b>
             </div>
             <div>
-              <span>Quick fix / extra checks</span>
-              <b className="qp-bad">
-                {results.cases[0].stages[2].outcome === 'fail'
-                  ? 'Rejected'
-                  : 'Passed'}
-              </b>
-            </div>
-            <div>
-              <span>Better patch / extra checks</span>
-              <b className="qp-good">
-                {results.cases[0].stages[4].outcome === 'pass'
-                  ? 'Pass'
-                  : 'Fail'}
-              </b>
+              <span>Rewind / browser</span>
+              <b className="qp-bad">Duplicate returns</b>
             </div>
           </div>
         </div>
       </Link>
+      <div className="qp-details-links">
+        <span>Original synthetic workflow. Executed with Solari.</span>
+        <Link href="/open-source">Explore three open-source cases ↗</Link>
+      </div>
     </ProductShell>
   );
 }

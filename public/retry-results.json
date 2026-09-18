@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "case": "partial-batch-retry",
+  "kind": "original-synthetic-example",
+  "mode": "solari-cloud",
+  "startedAt": "2026-09-18T06:47:31.526Z",
+  "finishedAt": "2026-09-18T06:47:36.986Z",
+  "freeze": {
+    "frozenAt": "2026-09-18T06:44:37.588Z",
+    "checksSha256": "915c6769d065c64553cf984a5dad45d4698754ba7cfecca81cc0d383e1468ad3",
+    "candidateSha256": "71e54383441200e18b3ad6ab9771b05c0fae1161ae23bad862a51bd2f30a0574",
+    "attempts": 1,
+    "testAuthorAndRepairAgentSeparated": true,
+    "filesystemIsolationEnforced": false,
+    "independentAttestation": false,
+    "method": "Checks hashed before task dispatch. Repair agent instructed to read only TASK.md and original.cjs and write one candidate. Visible reproduction allowed. No hidden-test feedback or second attempt. Both agents share a workspace; this is not an access-control guarantee. The coordinator is the test author."
+  },
+  "cost": {
+    "measured": false,
+    "reason": "No per-run billing receipt available; account balance rounding is not a cost measurement."
+  },
+  "limitations": [
+    "Single worker and in-memory ledger; no concurrency or crash-durability guarantee.",
+    "Frozen checks are public after evaluation; future reruns are replay, not fresh blind attempts.",
+    "Provider readbacks are collected by our runner, not independent attestation."
+  ],
+  "stages": [
+    {
+      "id": "original",
+      "expectation": "fail",
+      "verdict": "confirmed",
+      "outcome": "fail",
+      "checks": [
+        {
+          "id": "partial-retry",
+          "expected": [
+            "incomplete",
+            true,
+            "complete",
+            "A,B,B",
+            "r-B"
+          ],
+          "actual": [
+            "incomplete",
+            false,
+            "complete",
+            "A,B,A,B",
+            "r-B"
+          ],
+          "pass": false
+        }
+      ],
+      "cleanupConfirmed": true,
+      "durationMs": 1071,
+      "artifacts": {
+        "subject.cjs": "e6e44fbdd458b7136e9e909dc5df1bb2580a5b6deaebb7d525c3f2c4a674b2bd",
+        "check.cjs": "915c6769d065c64553cf984a5dad45d4698754ba7cfecca81cc0d383e1468ad3"
+      },
+      "hashesVerified": true,
+      "provisionMs": 1476,
+      "executionMs": 120,
+      "cleanupMs": 239,
+      "lifecycleMs": 1837,
+      "providerObserved": true,
+      "releaseVerified": true
+    },
+    {
+      "id": "candidate-repro",
+      "expectation": "pass",
+      "verdict": "confirmed",
+      "outcome": "pass",
+      "checks": [
+        {
+          "id": "partial-retry",
+          "expected": [
+            "incomplete",
+            true,
+            "complete",
+            "A,B,B",
+            "r-B"
+          ],
+          "actual": [
+            "incomplete",
+            true,
+            "complete",
+            "A,B,B",
+            "r-B"
+          ],
+          "pass": true
+        }
+      ],
+      "cleanupConfirmed": true,
+      "durationMs": 1173,
+      "artifacts": {
+        "subject.cjs": "71e54383441200e18b3ad6ab9771b05c0fae1161ae23bad862a51bd2f30a0574",
+        "check.cjs": "915c6769d065c64553cf984a5dad45d4698754ba7cfecca81cc0d383e1468ad3"
+      },
+      "hashesVerified": true,
+      "provisionMs": 859,
+      "executionMs": 126,
+      "cleanupMs": 359,
+      "lifecycleMs": 1345,
+      "providerObserved": true,
+      "releaseVerified": true
+    },
+    {
+      "id": "candidate-frozen-checks",
+      "expectation": "pass",
+      "verdict": "confirmed",
+      "outcome": "pass",
+      "checks": [
+        {
+          "id": "partial-retry",
+          "expected": [
+            "incomplete",
+            true,
+            "complete",
+            "A,B,B",
+            "r-B"
+          ],
+          "actual": [
+            "incomplete",
+            true,
+            "complete",
+            "A,B,B",
+            "r-B"
+          ],
+          "pass": true
+        },
+        {
+          "id": "unknown-is-not-retried",
+          "expected": [
+            "incomplete",
+            "incomplete",
+            "unknown",
+            "A,B"
+          ],
+          "actual": [
+            "incomplete",
+            "incomplete",
+            "unknown",
+            "A,B"
+          ],
+          "pass": true
+        },
+        {
+          "id": "missing-receipt-is-unknown",
+          "expected": [
+            "incomplete",
+            "incomplete",
+            "unknown",
+            1
+          ],
+          "actual": [
+            "incomplete",
+            "incomplete",
+            "unknown",
+            1
+          ],
+          "pass": true
+        },
+        {
+          "id": "unrecognized-response",
+          "expected": [
+            "incomplete",
+            "incomplete",
+            "unknown",
+            1
+          ],
+          "actual": [
+            "incomplete",
+            "incomplete",
+            "unknown",
+            1
+          ],
+          "pass": true
+        },
+        {
+          "id": "preexisting-malformed-entry",
+          "expected": [
+            "incomplete",
+            0
+          ],
+          "actual": [
+            "incomplete",
+            0
+          ],
+          "pass": true
+        },
+        {
+          "id": "accepted-and-unrelated-preserved",
+          "expected": [
+            "complete",
+            1,
+            "old",
+            "unknown"
+          ],
+          "actual": [
+            "complete",
+            1,
+            "old",
+            "unknown"
+          ],
+          "pass": true
+        },
+        {
+          "id": "empty-batch",
+          "expected": [
+            "complete"
+          ],
+          "actual": [
+            "complete"
+          ],
+          "pass": true
+        }
+      ],
+      "cleanupConfirmed": true,
+      "durationMs": 979,
+      "artifacts": {
+        "subject.cjs": "71e54383441200e18b3ad6ab9771b05c0fae1161ae23bad862a51bd2f30a0574",
+        "check.cjs": "915c6769d065c64553cf984a5dad45d4698754ba7cfecca81cc0d383e1468ad3"
+      },
+      "hashesVerified": true,
+      "provisionMs": 755,
+      "executionMs": 141,
+      "cleanupMs": 280,
+      "lifecycleMs": 1176,
+      "providerObserved": true,
+      "releaseVerified": true
+    },
+    {
+      "id": "undo",
+      "expectation": "fail",
+      "verdict": "confirmed",
+      "outcome": "fail",
+      "checks": [
+        {
+          "id": "partial-retry",
+          "expected": [
+            "incomplete",
+            true,
+            "complete",
+            "A,B,B",
+            "r-B"
+          ],
+          "actual": [
+            "incomplete",
+            false,
+            "complete",
+            "A,B,A,B",
+            "r-B"
+          ],
+          "pass": false
+        }
+      ],
+      "cleanupConfirmed": true,
+      "durationMs": 953,
+      "artifacts": {
+        "subject.cjs": "e6e44fbdd458b7136e9e909dc5df1bb2580a5b6deaebb7d525c3f2c4a674b2bd",
+        "check.cjs": "915c6769d065c64553cf984a5dad45d4698754ba7cfecca81cc0d383e1468ad3"
+      },
+      "hashesVerified": true,
+      "provisionMs": 708,
+      "executionMs": 165,
+      "cleanupMs": 224,
+      "lifecycleMs": 1098,
+      "providerObserved": true,
+      "releaseVerified": true
+    }
+  ],
+  "pass": true
+}
